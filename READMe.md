@@ -8,3 +8,16 @@
 * https://www.baeldung.com/ 
 * https://start.spring.io/
 * [Git commit message](https://www.conventionalcommits.org/en/v1.0.0/)
+
+
+
+
+
+
+  ```mermaid
+  graph TD;
+      A-->B;
+      A-->C;
+      B-->D;
+      C-->D;
+```
