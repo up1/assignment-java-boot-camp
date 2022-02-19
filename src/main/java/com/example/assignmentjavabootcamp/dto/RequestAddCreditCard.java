@@ -6,7 +6,10 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 import org.hibernate.validator.constraints.Length;
 
+import javax.validation.constraints.Digits;
 import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
 import java.time.LocalDate;
 
 @NoArgsConstructor
@@ -15,6 +18,7 @@ import java.time.LocalDate;
 @AllArgsConstructor
 public class RequestAddCreditCard {
 
+    @NotNull
     private Long customerId;
     @NotBlank
     @Length(min = 16, max = 16)

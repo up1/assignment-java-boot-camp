@@ -24,7 +24,10 @@ public class GlobalExceptionHandler {
                 .body(new ExceptionResponse(ex.getMessage(), LocalDateTime.now(), HttpStatus.NOT_FOUND.value()));
     }
 
-    @ExceptionHandler({InvalidInputToShoppingcartException.class})
+    @ExceptionHandler({
+            InvalidInputToShoppingcartException.class,
+            ExpireCreditCardException.class
+    })
     public ResponseEntity handleInvalidInputException(RuntimeException ex) {
         ex.printStackTrace();
         return ResponseEntity
