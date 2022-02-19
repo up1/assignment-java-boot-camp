@@ -33,13 +33,13 @@ public class ProductServiceTest {
     public void whenGetSavedProductId_ShouldReturnProduct() {
         Mockito.when(productRepository.findById(Mockito.any())).thenReturn(Optional.of(new Product()));
 
-        Product resultProduct = productService.findProductById(1L);
+        Product resultProduct = productService.getProductById(1L);
         assertNotNull(resultProduct);
     }
 
     @Test
     public void whenGetUnsavedProductId_ShouldThrowException() {
         Mockito.when(productRepository.findById(Mockito.any())).thenReturn(Optional.empty());
-        Assertions.assertThrows(ProductNotFoundException.class, () -> productService.findProductById(1L));
+        Assertions.assertThrows(ProductNotFoundException.class, () -> productService.getProductById(1L));
     }
 }

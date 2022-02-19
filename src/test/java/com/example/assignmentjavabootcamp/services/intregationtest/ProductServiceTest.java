@@ -1,7 +1,6 @@
 package com.example.assignmentjavabootcamp.services.intregationtest;
 
 import com.example.assignmentjavabootcamp.models.Product;
-import com.example.assignmentjavabootcamp.repository.ProductRepository;
 import com.example.assignmentjavabootcamp.services.ProductService;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -20,19 +19,19 @@ public class ProductServiceTest {
 
     @Test
     public void whenFindContainKeyword_ShouldReturnNotEmptyProductList() {
-        List<Product> productList = productService.findProductByContainsName("Adidas");
+        List<Product> productList = productService.getProductByContainsName("Adidas");
         assertFalse(productList.isEmpty());
     }
 
     @Test
     public void  whenFindNotContainKeyword_ShouldReturnEmptyProductList() {
-        List<Product> productList = productService.findProductByContainsName("nike");
+        List<Product> productList = productService.getProductByContainsName("nike");
         assertTrue(productList.isEmpty());
     }
 
     @Test
     public void whenFindEmptyStringKeyword_ShouldReturnAllProductList() {
-        List<Product> productList = productService.findProductByContainsName("");
+        List<Product> productList = productService.getProductByContainsName("");
         assertEquals(5, productList.size());
     }
 }

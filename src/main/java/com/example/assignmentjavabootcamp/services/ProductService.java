@@ -16,17 +16,17 @@ import java.util.Optional;
 public class ProductService {
     private final ProductRepository productRepository;
 
-    public List<Product> findProductByContainsName(String name) {
+    public List<Product> getProductByContainsName(String name) {
         List<Product> queryResult = productRepository.findByNameContains(name);
         queryResult.forEach(product -> log.info(product.getName()));
         return queryResult;
     }
 
-    public Product findProductById(Long id) {
+    public Product getProductById(Long id) {
         Optional<Product> productOptional = productRepository.findById(id);
-        if(productOptional.isPresent()) {
+        if (productOptional.isPresent()) {
             return productOptional.get();
         }
-        throw new ProductNotFoundException("Product id : " +id + " was  not found");
+        throw new ProductNotFoundException("Product id : " + id + " was  not found");
     }
 }
