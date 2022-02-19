@@ -1,11 +1,11 @@
 package com.example.assignmentjavabootcamp.models;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import javax.persistence.*;
-import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 
 @Entity
@@ -24,12 +24,13 @@ public class ShoppingcartItem {
     @JoinColumn(name = "product_id")
     private Product product;
 
-    @NotBlank
+    @NotNull
     private Integer amount;
 
     @ManyToOne
     @NotNull
     @JoinColumn(name = "owner_id")
+    @JsonIgnore
     private Customer customer;
 
     public ShoppingcartItem(Product product, Integer amount, Customer customer) {
