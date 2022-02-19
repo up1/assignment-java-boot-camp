@@ -23,6 +23,9 @@ public class OrderDetail {
     private String productName;
 
     @NotBlank
+    private String color;
+
+    @NotBlank
     private Integer amount;
 
     @NotBlank
@@ -31,4 +34,12 @@ public class OrderDetail {
     @ManyToOne
     @JoinColumn(name = "orders_id")
     private Order order;
+
+    public OrderDetail(String productName, String color, Integer amount, Double price, Order order) {
+        this.productName = productName;
+        this.color = color;
+        this.amount = amount;
+        this.price = price;
+        this.order = order;
+    }
 }
