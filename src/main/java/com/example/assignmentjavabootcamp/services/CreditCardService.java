@@ -1,8 +1,7 @@
 package com.example.assignmentjavabootcamp.services;
 
-import com.example.assignmentjavabootcamp.exceptions.CreaditCardNotFoundException;
+import com.example.assignmentjavabootcamp.exceptions.CreditCardNotFoundException;
 import com.example.assignmentjavabootcamp.models.CreditCard;
-import com.example.assignmentjavabootcamp.models.Customer;
 import com.example.assignmentjavabootcamp.repository.CreditCardRepository;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -16,20 +15,19 @@ public class CreditCardService {
 
     private final CreditCardRepository creditCardRepository;
 
-    public void addCreditCard(@NotNull Customer customer, @NotNull CreditCard creditCard) {
-        creditCard.setOwner(customer);
-        creditCardRepository.save(creditCard);
+    public CreditCard getCreditCard(Long id) {
+        Optional<CreditCard> creditCardOptional = creditCardRepository.findById(id);
+        if (creditCardOptional.isPresent()) {
+            return creditCardOptional.get();
+        }
+        throw new CreditCardNotFoundException("Creditcard id : " + id + " not found");
+    }
+
+    public CreditCard addCreditCard(@NotNull CreditCard creditCard) {
+        return creditCardRepository.save(creditCard);
     }
 
     public void removeCreditCard(@NotNull CreditCard creditCard) {
         creditCardRepository.delete(creditCard);
-    }
-
-    public CreditCard getCreditCard(@NotNull Long ownerId) {
-        Optional<CreditCard> creditCardOptional = creditCardRepository.findByOwnerCustomerId(ownerId);
-        if (creditCardOptional.isPresent()) {
-            return creditCardOptional.get();
-        }
-        throw new CreaditCardNotFoundException("CreditCard's owner id : " + ownerId + " not found");
     }
 }
