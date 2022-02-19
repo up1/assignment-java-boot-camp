@@ -1,5 +1,5 @@
 insert into Customers (customer_id, firstname, lastname, address, zip_code, province, phone_number)
-Values (1, 'Tom', 'Hank', '38 Moo 14', '10140', 'Bangkok', '09111111');
+Values (1, 'Tom', 'Hank', '38 Moo 14', '10140', 'Bangkok', '0911111111');
 
 insert into Products(product_id, name,type_of_size, size,color ,price, amount)
 values (1,'Adidas RUNNING Roamer FY6698','UK','9','Black',1350,15),
