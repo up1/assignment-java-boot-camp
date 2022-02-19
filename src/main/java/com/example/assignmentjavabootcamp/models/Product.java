@@ -19,27 +19,21 @@ public class Product {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long productId;
 
-    @NotNull
     @NotBlank
     private String name;
 
-    @NotNull
     @NotBlank
     private String size;
 
-    @NotNull
     @NotBlank
     private Double price;
 
-    @NotNull
     @NotBlank
     private String typeOfSize;
 
-    @NotNull
     @NotBlank
     private String color;
 
-    @NotNull
     @NotBlank
     private Integer amount;
 

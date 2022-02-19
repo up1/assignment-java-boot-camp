@@ -19,15 +19,12 @@ public class OrderDetail {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long orderDetailId;
 
-    @NotNull
     @NotBlank
     private String productName;
 
-    @NotNull
     @NotBlank
     private Integer amount;
 
-    @NotNull
     @NotBlank
     private Double price;
 

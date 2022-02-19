@@ -19,27 +19,23 @@ public class Customer {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long customerId;
 
-    @NotNull
     @NotBlank
     private String firstname;
 
-    @NotNull
     @NotBlank
     private String lastname;
 
-    @NotNull
     @NotBlank
     private String address;
 
     @Length(min = 5,max = 5)
-    @NotNull
     @NotBlank
     private String zipCode;
 
+    @NotBlank
     private String province;
 
     @Length(min = 10,max = 10)
-    @NotNull
     @NotBlank
     private String phoneNumber;
 

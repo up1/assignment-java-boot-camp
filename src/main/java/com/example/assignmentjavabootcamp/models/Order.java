@@ -22,11 +22,9 @@ public class Order {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @NotNull
     @NotBlank
     private LocalDateTime buyAt;
 
-    @NotNull
     @NotBlank
     private String payBy;
 

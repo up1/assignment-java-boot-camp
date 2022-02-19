@@ -23,7 +23,6 @@ public class ShoppingcartItem {
     @NotNull
     private Product product;
 
-    @NotNull
     @NotBlank
     private Integer amount;
 
