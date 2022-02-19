@@ -9,7 +9,6 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.validation.constraints.NotBlank;
-import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
 
 @Entity
@@ -27,21 +26,31 @@ public class Product {
     private String name;
 
     @NotNull
-    @NotBlank(message = "size should not be blank")
+    @NotBlank
     private String size;
 
-    @NotBlank
     @NotNull
+    @NotBlank
     private Double price;
 
-    @NotBlank
     @NotNull
+    @NotBlank
+    private String typeOfSize;
+
+    @NotNull
+    @NotBlank
+    private String color;
+
+    @NotNull
+    @NotBlank
     private Integer amount;
 
-    public Product(String name, String size, Double price, Integer amount) {
+    public Product(String name, String size, Double price, String typeOfSize, String color, Integer amount) {
         this.name = name;
         this.size = size;
         this.price = price;
+        this.typeOfSize = typeOfSize;
+        this.color = color;
         this.amount = amount;
     }
 }
