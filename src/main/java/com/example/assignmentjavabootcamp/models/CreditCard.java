@@ -34,15 +34,9 @@ public class CreditCard {
     @NotNull
     private LocalDate exp;
 
-    @OneToOne
-    @NotNull
-    @JoinColumn(name = "owner_id")
-    private Customer owner;
-
-    public CreditCard(String creditCardNumber, String cvv, LocalDate exp, Customer owner) {
+    public CreditCard(String creditCardNumber, String cvv, LocalDate exp) {
         this.creditCardNumber = creditCardNumber;
         this.cvv = cvv;
         this.exp = exp;
-        this.owner = owner;
     }
 }

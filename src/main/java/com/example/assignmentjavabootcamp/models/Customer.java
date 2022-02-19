@@ -39,6 +39,8 @@ public class Customer {
     @NotBlank
     private String phoneNumber;
 
+    @OneToOne
+    private CreditCard creditCard;
 
     public Customer(String firstname, String lastname, String address, String zipCode, String province, String phoneNumber) {
         this.firstname = firstname;
@@ -47,5 +49,15 @@ public class Customer {
         this.zipCode = zipCode;
         this.province = province;
         this.phoneNumber = phoneNumber;
+    }
+
+    public Customer(String firstname, String lastname, String address, String zipCode, String province, String phoneNumber, CreditCard creditCard) {
+        this.firstname = firstname;
+        this.lastname = lastname;
+        this.address = address;
+        this.zipCode = zipCode;
+        this.province = province;
+        this.phoneNumber = phoneNumber;
+        this.creditCard = creditCard;
     }
 }
