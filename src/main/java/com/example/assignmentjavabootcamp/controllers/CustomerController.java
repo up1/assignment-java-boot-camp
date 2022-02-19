@@ -12,10 +12,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import javax.validation.Valid;
-import java.time.LocalDate;
-import java.time.format.DateTimeFormatter;
-import java.time.format.DateTimeFormatterBuilder;
-import java.time.temporal.ChronoField;
 
 @RestController
 @AllArgsConstructor
@@ -26,14 +22,7 @@ public class CustomerController {
 
     @PostMapping("/addCreditCard")
     public ResponseEntity<?> addCreditCard(@RequestBody @Valid RequestAddCreditCard request) {
-        DateTimeFormatter formatter = new DateTimeFormatterBuilder()
-                .appendPattern("MM/yy")
-                .parseDefaulting(ChronoField.DAY_OF_MONTH, 31)
-                .toFormatter();
-
-        LocalDate dateExpired = LocalDate.parse(request.getExp(), formatter);
-
-        Customer customer = customerService.addCreditCard(request.getCustomerId(), new CreditCard(request.getCreditCardNumber(), request.getCvv(), dateExpired));
+        Customer customer = customerService.addCreditCard(request.getCustomerId(), new CreditCard(request.getCreditCardNumber(), request.getCvv(), request.getExp()));
         return ResponseEntity.ok(customer);
     }
 }
