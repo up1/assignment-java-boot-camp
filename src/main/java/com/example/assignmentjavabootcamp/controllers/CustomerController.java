@@ -2,9 +2,9 @@ package com.example.assignmentjavabootcamp.controllers;
 
 import com.example.assignmentjavabootcamp.dto.RequestAddCreditCard;
 import com.example.assignmentjavabootcamp.models.CreditCard;
-import com.example.assignmentjavabootcamp.models.Customer;
 import com.example.assignmentjavabootcamp.services.CustomerService;
 import lombok.AllArgsConstructor;
+import org.json.JSONObject;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -22,7 +22,10 @@ public class CustomerController {
 
     @PostMapping("/addCreditCard")
     public ResponseEntity<?> addCreditCard(@RequestBody @Valid RequestAddCreditCard request) {
-        Customer customer = customerService.addCreditCard(request.getCustomerId(), new CreditCard(request.getCreditCardNumber(), request.getCvv(), request.getExp()));
-        return ResponseEntity.ok(customer);
+        customerService.addCreditCard(request.getCustomerId(), new CreditCard(request.getCreditCardNumber(), request.getCvv(), request.getExp()));
+        return ResponseEntity.ok(new JSONObject()
+                .put("message", "added credit card")
+                .put("status", 200)
+        );
     }
 }
