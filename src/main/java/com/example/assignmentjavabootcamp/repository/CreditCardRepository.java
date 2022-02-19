@@ -7,5 +7,4 @@ import java.util.Optional;
 
 public interface CreditCardRepository extends JpaRepository<CreditCard, Long> {
 
-    Optional<CreditCard> findByOwnerCustomerId(Long ownerId);
 }
