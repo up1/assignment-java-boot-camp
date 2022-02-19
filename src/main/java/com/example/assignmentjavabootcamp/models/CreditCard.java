@@ -4,17 +4,18 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import org.hibernate.validator.constraints.Length;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 
 @Entity
 @Getter
 @Setter
 @NoArgsConstructor
-@AllArgsConstructor
 @Table(name = "creditcards")
 public class CreditCard {
 
@@ -23,16 +24,25 @@ public class CreditCard {
     private Long id;
 
     @Column(unique = true)
+    @Length(min = 16,max = 16)
     private String creditCardNumber;
 
-    @NotNull
     @NotBlank
+    @Length(min = 3,max = 3)
     private String cvv;
-    @NotNull
-    @NotBlank
-    private LocalDateTime exp;
 
-    @ManyToOne
     @NotNull
+    private LocalDate exp;
+
+    @OneToOne
+    @NotNull
+    @JoinColumn(name = "owner_id")
     private Customer owner;
+
+    public CreditCard(String creditCardNumber, String cvv, LocalDate exp, Customer owner) {
+        this.creditCardNumber = creditCardNumber;
+        this.cvv = cvv;
+        this.exp = exp;
+        this.owner = owner;
+    }
 }
