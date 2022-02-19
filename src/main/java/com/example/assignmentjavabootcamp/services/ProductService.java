@@ -1,5 +1,6 @@
 package com.example.assignmentjavabootcamp.services;
 
+import com.example.assignmentjavabootcamp.exceptions.ProductNotFoundException;
 import com.example.assignmentjavabootcamp.models.Product;
 import com.example.assignmentjavabootcamp.repository.ProductRepository;
 import lombok.AllArgsConstructor;
@@ -19,5 +20,13 @@ public class ProductService {
         List<Product> queryResult = productRepository.findByNameContains(name);
         queryResult.forEach(product -> log.info(product.getName()));
         return queryResult;
+    }
+
+    public Product findProductById(Long id) {
+        Optional<Product> productOptional = productRepository.findById(id);
+        if(productOptional.isPresent()) {
+            return productOptional.get();
+        }
+        throw new ProductNotFoundException("Product id : " +id + " was  not found");
     }
 }
