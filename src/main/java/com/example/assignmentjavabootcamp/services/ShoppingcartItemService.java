@@ -1,5 +1,6 @@
 package com.example.assignmentjavabootcamp.services;
 
+import com.example.assignmentjavabootcamp.exceptions.CreditCardNotFoundException;
 import com.example.assignmentjavabootcamp.exceptions.InvalidInputToShoppingcartException;
 import com.example.assignmentjavabootcamp.exceptions.ShoppingcartItemNotFoundException;
 import com.example.assignmentjavabootcamp.models.Customer;
@@ -21,6 +22,8 @@ public class ShoppingcartItemService {
     private final CustomerService customerService;
 
     private final ProductService productService;
+
+    private final OrderService orderService;
 
     public ShoppingcartItem save(ShoppingcartItem shoppingcartItem) {
         return shoppingcartItemRepository.save(shoppingcartItem);
@@ -71,7 +74,7 @@ public class ShoppingcartItemService {
         List<ShoppingcartItem> itemList = getAllShoppingcartItem(customerId);
         double total = 0d;
         for (ShoppingcartItem item : itemList) {
-            total = +(item.getAmount() * item.getProduct().getPrice());
+            total += (item.getAmount() * item.getProduct().getPrice());
         }
         return total;
     }
@@ -82,9 +85,11 @@ public class ShoppingcartItemService {
 
         if (customer.getCreditCard() != null) {
             List<ShoppingcartItem> itemList = getAllShoppingcartItem(customerId);
-            for(ShoppingcartItem item : itemList) {
-                productService.checkout(item.getProduct(),item.getAmount());
+            for (ShoppingcartItem item : itemList) {
+                productService.checkout(item.getProduct(), item.getAmount());
             }
+            orderService.buildOrder(customer, itemList);
         }
+        throw new CreditCardNotFoundException("Customer id : " + customerId + " not found creditcard");
     }
 }
