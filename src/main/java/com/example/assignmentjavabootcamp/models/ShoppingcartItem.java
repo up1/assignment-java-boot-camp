@@ -21,6 +21,7 @@ public class ShoppingcartItem {
 
     @ManyToOne
     @NotNull
+    @JoinColumn(name = "product_id")
     private Product product;
 
     @NotBlank
@@ -28,6 +29,7 @@ public class ShoppingcartItem {
 
     @ManyToOne
     @NotNull
+    @JoinColumn(name = "owner_id")
     private Customer customer;
 
     public ShoppingcartItem(Product product, Integer amount, Customer customer) {
