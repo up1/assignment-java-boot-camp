@@ -3,5 +3,8 @@ package com.example.assignmentjavabootcamp.repository;
 import com.example.assignmentjavabootcamp.models.ShoppingcartItem;
 import org.springframework.data.jpa.repository.JpaRepository;
 
-public interface ShoppingcartItemRepository extends JpaRepository<ShoppingcartItem,Long> {
+import java.util.Optional;
+
+public interface ShoppingcartItemRepository extends JpaRepository<ShoppingcartItem, Long> {
+    Optional<ShoppingcartItem> findByCustomerCustomerIdAndProductProductId(Long customerId, Long productId);
 }
