@@ -8,6 +8,7 @@ import com.example.assignmentjavabootcamp.models.Product;
 import com.example.assignmentjavabootcamp.models.ShoppingcartItem;
 import com.example.assignmentjavabootcamp.repository.ShoppingcartItemRepository;
 import lombok.AllArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -15,6 +16,7 @@ import java.util.List;
 
 @Service
 @AllArgsConstructor
+@Slf4j
 public class ShoppingcartItemService {
 
     private final ShoppingcartItemRepository shoppingcartItemRepository;
@@ -40,12 +42,14 @@ public class ShoppingcartItemService {
         throw new ShoppingcartItemNotFoundException("Not found this item");
     }
 
-    public void addItem(Long customerId, Long productId, Integer amount) {
+    public ShoppingcartItem addItem(Long customerId, Long productId, Integer amount) {
         Customer customer = customerService.getCustomer(customerId);
         Product product = productService.getProductById(productId);
 
         if (product.getAmount() >= amount) {
-            save(new ShoppingcartItem(product, amount, customer));
+            ShoppingcartItem item = save(new ShoppingcartItem(product, amount, customer));
+            log.info("add item : " + productId + " to cart");
+            return item;
         }
         throw new InvalidInputToShoppingcartException("ProductId : " + productId + " amount is less than " + amount);
     }
