@@ -17,8 +17,6 @@ public class ProductServiceTest {
     @Autowired
     ProductService productService;
 
-    @Autowired
-    ProductRepository productRepository;
 
     @Test
     public void whenFindContainKeyword_ShouldReturnNotEmptyProductList() {
