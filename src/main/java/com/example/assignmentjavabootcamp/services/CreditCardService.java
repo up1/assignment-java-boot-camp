@@ -4,6 +4,7 @@ import com.example.assignmentjavabootcamp.exceptions.CreditCardNotFoundException
 import com.example.assignmentjavabootcamp.models.CreditCard;
 import com.example.assignmentjavabootcamp.repository.CreditCardRepository;
 import lombok.AllArgsConstructor;
+import org.springframework.lang.NonNull;
 import org.springframework.stereotype.Service;
 
 import javax.validation.constraints.NotNull;
@@ -23,11 +24,11 @@ public class CreditCardService {
         throw new CreditCardNotFoundException("Creditcard id : " + id + " not found");
     }
 
-    public CreditCard addCreditCard(@NotNull CreditCard creditCard) {
+    public CreditCard addCreditCard(@NonNull CreditCard creditCard) {
         return creditCardRepository.save(creditCard);
     }
 
-    public void removeCreditCard(@NotNull CreditCard creditCard) {
+    public void removeCreditCard(@NonNull CreditCard creditCard) {
         creditCardRepository.delete(creditCard);
     }
 }
