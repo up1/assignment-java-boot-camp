@@ -12,6 +12,7 @@ import javax.validation.constraints.NotNull;
 @Getter
 @Setter
 @NoArgsConstructor
+@Table(name = "shoppingcart_items")
 public class ShoppingcartItem {
 
     @Id
