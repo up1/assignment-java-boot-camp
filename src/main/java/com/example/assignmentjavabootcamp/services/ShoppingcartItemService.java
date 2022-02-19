@@ -48,26 +48,27 @@ public class ShoppingcartItemService {
 
         if (product.getAmount() >= amount) {
             ShoppingcartItem item = save(new ShoppingcartItem(product, amount, customer));
-            log.info("add item : " + productId + " to cart");
+            log.info("add item : " + productId + " to cart amount is " + item.getAmount());
             return item;
         }
         throw new InvalidInputToShoppingcartException("ProductId : " + productId + " amount is less than " + amount);
     }
 
-    public void removeItem(Long customerId, Long productId, Integer setAmount) {
+    public ShoppingcartItem removeItem(Long customerId, Long productId, Integer setAmount) {
         Customer customer = customerService.getCustomer(customerId);
         Product product = productService.getProductById(productId);
         ShoppingcartItem item = getShoppingcartItem(customer.getCustomerId(), product.getProductId());
 
-        if (setAmount < 0) {
-            throw new InvalidInputToShoppingcartException("Can not set amount of item in shoppingCart to less than 0");
-        } else if (setAmount > 0 && product.getAmount() >= setAmount) {
-            item.setAmount(setAmount);
+        if (setAmount < 0 || setAmount > item.getAmount()) {
+            throw new InvalidInputToShoppingcartException("Can not remove amount of item in shoppingCart");
         } else if (setAmount == 0) {
             delete(item);
+        } else {
+            item.setAmount(item.getAmount() - setAmount);
         }
-        save(item);
-
+        item = save(item);
+        log.info("remove amount of item from cart remaining is " + item.getAmount());
+        return item;
     }
 
     public List<ShoppingcartItem> getAllShoppingcartItem(Long customerId) {
