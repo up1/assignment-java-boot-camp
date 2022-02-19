@@ -30,4 +30,14 @@ public class GlobalExceptionHandler {
                 .status(HttpStatus.BAD_REQUEST)
                 .body(new ExceptionResponse(ex.getMessage(), LocalDateTime.now(), HttpStatus.BAD_REQUEST.value()));
     }
+
+    @ExceptionHandler({
+            InvalidCheckoutException.class
+    })
+    public ResponseEntity handleInternalException(RuntimeException ex) {
+        ex.printStackTrace();
+        return ResponseEntity
+                .status(HttpStatus.INTERNAL_SERVER_ERROR)
+                .body(new ExceptionResponse(ex.getMessage(), LocalDateTime.now(), HttpStatus.INTERNAL_SERVER_ERROR.value()));
+    }
 }
