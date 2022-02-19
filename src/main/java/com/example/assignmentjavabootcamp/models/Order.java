@@ -28,13 +28,20 @@ public class Order {
     @NotBlank
     private String payBy;
 
+    @NotBlank
+    private String shippingAddress;
+
+    @NotBlank
+    private String phoneNumber;
+
     @ManyToOne
     @JoinColumn(name = "customer_id")
     private Customer orderOwner;
 
-    public Order(LocalDateTime buyAt, String payBy, Customer customer) {
+    public Order(LocalDateTime buyAt, String payBy, String address, Customer customer) {
         this.buyAt = buyAt;
         this.payBy = payBy;
         this.orderOwner = customer;
+        this.shippingAddress = address;
     }
 }
