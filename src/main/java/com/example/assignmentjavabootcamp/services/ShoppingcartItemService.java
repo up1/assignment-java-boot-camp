@@ -13,6 +13,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
+import java.util.Optional;
 
 @Service
 @AllArgsConstructor
@@ -45,9 +46,19 @@ public class ShoppingcartItemService {
     public ShoppingcartItem addItem(Long customerId, Long productId, Integer amount) {
         Customer customer = customerService.getCustomer(customerId);
         Product product = productService.getProductById(productId);
+        Optional<ShoppingcartItem> itemOptional = shoppingcartItemRepository.findByCustomerCustomerIdAndProductProductId(customerId, productId);
+        ShoppingcartItem item = null;
 
-        if (product.getAmount() >= amount) {
-            ShoppingcartItem item = save(new ShoppingcartItem(product, amount, customer));
+        if (itemOptional.isPresent()) {
+            item = itemOptional.get();
+            if (item.getAmount() + amount <= product.getAmount()) {
+                item.setAmount(item.getAmount() + amount);
+                save(item);
+                log.info("add item : " + productId + " to cart amount is " + item.getAmount());
+                return item;
+            }
+        } else if (amount <= product.getAmount()) {
+            item = save(new ShoppingcartItem(product, amount, customer));
             log.info("add item : " + productId + " to cart amount is " + item.getAmount());
             return item;
         }
