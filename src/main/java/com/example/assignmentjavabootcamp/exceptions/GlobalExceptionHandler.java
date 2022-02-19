@@ -14,7 +14,8 @@ public class GlobalExceptionHandler {
     @ExceptionHandler({ProductNotFoundException.class,
             CustomerNotFoundException.class,
             CredentialNotFoundException.class,
-            ShoppingcartItemNotFoundException.class
+            ShoppingcartItemNotFoundException.class,
+            OrderNotFoundException.class
     })
     public ResponseEntity handleNotFoundException(RuntimeException ex) {
         ex.printStackTrace();
