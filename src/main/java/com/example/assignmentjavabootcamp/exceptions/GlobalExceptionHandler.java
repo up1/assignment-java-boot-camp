@@ -13,11 +13,21 @@ public class GlobalExceptionHandler {
 
     @ExceptionHandler({ProductNotFoundException.class,
             CustomerNotFoundException.class,
-            CredentialNotFoundException.class})
+            CredentialNotFoundException.class,
+            ShoppingcartItemNotFoundException.class
+    })
     public ResponseEntity handleNotFoundException(RuntimeException ex) {
         ex.printStackTrace();
         return ResponseEntity
                 .status(HttpStatus.NOT_FOUND)
                 .body(new ExceptionResponse(ex.getMessage(), LocalDateTime.now(), HttpStatus.NOT_FOUND.value()));
+    }
+
+    @ExceptionHandler({InvalidInputToShoppingcartException.class})
+    public ResponseEntity handleInvalidInputException(RuntimeException ex) {
+        ex.printStackTrace();
+        return ResponseEntity
+                .status(HttpStatus.BAD_REQUEST)
+                .body(new ExceptionResponse(ex.getMessage(), LocalDateTime.now(), HttpStatus.BAD_REQUEST.value()));
     }
 }
