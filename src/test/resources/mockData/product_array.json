@@ -1,0 +1,47 @@
+[
+  {
+    "productId": 1,
+    "name": "Adidas RUNNING Roamer FY6698",
+    "size": "9",
+    "price": 1350.0,
+    "typeOfSize": "UK",
+    "color": "Black",
+    "amount": 15
+  },
+  {
+    "productId": 2,
+    "name": "Adidas Yeezy 700 V2 Runner Boost Unisex B75571",
+    "size": "8",
+    "price": 2800.0,
+    "typeOfSize": "EU",
+    "color": "Red",
+    "amount": 14
+  },
+  {
+    "productId": 3,
+    "name": "Pharrell x NMD Human Race",
+    "size": "36",
+    "price": 1190.0,
+    "typeOfSize": "EU",
+    "color": "Yellow",
+    "amount": 20
+  },
+  {
+    "productId": 4,
+    "name": "Adidas ORIGINALS ZX 700 HD FX5812",
+    "size": "11.5",
+    "price": 3400.0,
+    "typeOfSize": "UK",
+    "color": "Black",
+    "amount": 42
+  },
+  {
+    "productId": 5,
+    "name": "Adidas ORIGINALS NMD R1 B42200",
+    "size": "3.5",
+    "price": 3588.0,
+    "typeOfSize": "UK",
+    "color": "Black",
+    "amount": 21
+  }
+]
