@@ -8,6 +8,9 @@ import com.example.assignmentjavabootcamp.models.ShoppingcartItem;
 import com.example.assignmentjavabootcamp.repository.ShoppingcartItemRepository;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
+
+import java.util.List;
 
 @Service
 @AllArgsConstructor
@@ -58,5 +61,30 @@ public class ShoppingcartItemService {
         }
         save(item);
 
+    }
+
+    public List<ShoppingcartItem> getAllShoppingcartItem(Long customerId) {
+        return shoppingcartItemRepository.findByCustomerCustomerId(customerId);
+    }
+
+    public double getTotal(Long customerId) {
+        List<ShoppingcartItem> itemList = getAllShoppingcartItem(customerId);
+        double total = 0d;
+        for (ShoppingcartItem item : itemList) {
+            total = +(item.getAmount() * item.getProduct().getPrice());
+        }
+        return total;
+    }
+
+    @Transactional
+    public void checkout(Long customerId) {
+        Customer customer = customerService.getCustomer(customerId);
+
+        if (customer.getCreditCard() != null) {
+            List<ShoppingcartItem> itemList = getAllShoppingcartItem(customerId);
+            for(ShoppingcartItem item : itemList) {
+                productService.checkout(item.getProduct(),item.getAmount());
+            }
+        }
     }
 }
