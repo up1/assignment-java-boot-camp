@@ -40,7 +40,8 @@ public class ProductService {
         if (product.getAmount() >= amount) {
             product.setAmount(product.getAmount() - amount);
             save(product);
+            return;
         }
-        throw new InvalidCheckoutException("can not checkout item : " + product.getProductId() + " amount item is less than " + amount);
+        throw new InvalidCheckoutException("can not checkout item id : " + product.getProductId() + " is less than " + amount);
     }
 }

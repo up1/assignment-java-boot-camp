@@ -111,6 +111,7 @@ public class ShoppingcartItemService {
                 productService.checkout(item.getProduct(), item.getAmount());
             }
             orderService.buildOrder(customer, itemList);
+            return;
         }
         throw new CreditCardNotFoundException("Customer id : " + customerId + " not found creditcard");
     }
