@@ -49,13 +49,6 @@ public class CustomerService {
         return saveCustomer(customer);
     }
 
-    public Customer removeCreditCard(Long id) {
-        Customer customer = getCustomer(id);
-        creditCardService.removeCreditCard(customer.getCreditCard());
-        customer.setCreditCard(null);
-        return saveCustomer(customer);
-    }
-
     public Customer addShippingAddress(RequestShippingAddress address) {
         Customer customer = getCustomer(address.getCustomerId());
         customer.setAddress(address.getAddress());
