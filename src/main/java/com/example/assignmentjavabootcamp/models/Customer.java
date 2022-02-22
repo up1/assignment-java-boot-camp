@@ -1,5 +1,6 @@
 package com.example.assignmentjavabootcamp.models;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -40,6 +41,7 @@ public class Customer {
     private String phoneNumber;
 
     @OneToOne
+    @JsonIgnore
     private CreditCard creditCard;
 
     public Customer(String firstname, String lastname, String address, String zipCode, String province, String phoneNumber) {
