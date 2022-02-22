@@ -28,10 +28,6 @@ public class OrderService {
         return orderRepository.save(order);
     }
 
-    public OrderDetail saveOrderDetail(OrderDetail orderDetail) {
-        return orderDetailRepository.save(orderDetail);
-    }
-
     public List<OrderDetail> saveAllOrderDetail(List<OrderDetail> orderDetailList) {
         return orderDetailRepository.saveAll(orderDetailList);
     }
