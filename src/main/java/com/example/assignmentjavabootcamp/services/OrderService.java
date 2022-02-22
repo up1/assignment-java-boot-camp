@@ -8,6 +8,7 @@ import lombok.AllArgsConstructor;
 import org.json.JSONArray;
 import org.json.JSONObject;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.time.LocalDateTime;
@@ -36,8 +37,23 @@ public class OrderService {
     }
 
     private JSONObject buildJSONOrder(Order order, List<OrderDetail> orderDetailList) {
-        return new JSONObject(order)
-                .put("product", orderDetailList);
+        JSONObject jsonObject = new JSONObject();
+        jsonObject.put("customerId", order.getOrderOwner().getCustomerId())
+                .put("buyAt", order.getBuyAt())
+                .put("payBy", order.getPayBy())
+                .put("phoneNumber", order.getPhoneNumber())
+                .put("shippingAddress", order.getShippingAddress())
+                .put("products", new JSONArray());
+
+        for (OrderDetail orderDetail : orderDetailList) {
+            jsonObject.getJSONArray("products").put(new JSONObject()
+                    .put("productName", orderDetail.getProductName())
+                    .put("color", orderDetail.getColor())
+                    .put("amount", orderDetail.getAmount())
+                    .put("price", orderDetail.getPrice())
+            );
+        }
+        return jsonObject;
     }
 
     public JSONObject getOrderById(Long orderId) {
