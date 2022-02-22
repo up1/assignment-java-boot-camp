@@ -51,11 +51,6 @@ public class CreditCard {
                 .parseDefaulting(ChronoField.DAY_OF_MONTH, 31)
                 .toFormatter();
 
-        LocalDate dateExpired = LocalDate.parse(exp, formatter);
-
-        if (dateExpired.isBefore(LocalDate.now())) {
-            throw new ExpireCreditCardException("Credit card is Expired");
-        }
-        return dateExpired;
+        return LocalDate.parse(exp, formatter);
     }
 }

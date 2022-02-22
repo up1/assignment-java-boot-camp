@@ -1,6 +1,6 @@
 package com.example.assignmentjavabootcamp.services;
 
-import com.example.assignmentjavabootcamp.exceptions.CreditCardNotFoundException;
+import com.example.assignmentjavabootcamp.exceptions.ExpireCreditCardException;
 import com.example.assignmentjavabootcamp.models.CreditCard;
 import com.example.assignmentjavabootcamp.repository.CreditCardRepository;
 import lombok.AllArgsConstructor;
@@ -9,7 +9,7 @@ import org.springframework.lang.NonNull;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
-import java.util.Optional;
+import java.time.LocalDate;
 
 @Service
 @AllArgsConstructor
@@ -18,15 +18,8 @@ public class CreditCardService {
 
     private final CreditCardRepository creditCardRepository;
 
-    public CreditCard getCreditCard(Long id) {
-        Optional<CreditCard> creditCardOptional = creditCardRepository.findById(id);
-        if (creditCardOptional.isPresent()) {
-            return creditCardOptional.get();
-        }
-        throw new CreditCardNotFoundException("Creditcard id : " + id + " not found");
-    }
-
     public CreditCard addCreditCard(@NonNull CreditCard creditCard) {
+        isExpired(creditCard);
         BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
         creditCard.setCreditCardNumber(passwordEncoder.encode(creditCard.getCreditCardNumber()));
         creditCard = creditCardRepository.save(creditCard);
@@ -34,7 +27,12 @@ public class CreditCardService {
         return creditCard;
     }
 
-    public void removeCreditCard(@NonNull CreditCard creditCard) {
-        creditCardRepository.delete(creditCard);
+    private boolean isExpired(CreditCard card) {
+        LocalDate dateExpired = card.getExp();
+        if (dateExpired.isBefore(LocalDate.now())) {
+            throw new ExpireCreditCardException("Credit card is Expired");
+        }
+        return false;
     }
+
 }
