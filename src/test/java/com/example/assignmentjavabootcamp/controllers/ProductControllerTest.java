@@ -22,13 +22,13 @@ public class ProductControllerTest {
 
     @Test
     public void whenGetUnsavedProductId_ShouldReturn404() {
-        String responseString = testRestTemplate.getForObject("/product/9", String.class);
+        String responseString = testRestTemplate.getForObject("/products/9", String.class);
         assertEquals(404, new JSONObject(responseString).getInt("httpCode"));
     }
 
     @Test
     public void whenGetSavedProductId_ShouldReturnProduct() throws JsonProcessingException {
-        String responseString = testRestTemplate.getForObject("/product/1", String.class);
+        String responseString = testRestTemplate.getForObject("/products/1", String.class);
         Product product = mapper.readValue(responseString, Product.class);
         assertNotNull(product);
     }

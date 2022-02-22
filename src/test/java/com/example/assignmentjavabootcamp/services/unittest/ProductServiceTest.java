@@ -14,6 +14,9 @@ import org.mockito.Mockito;
 import org.mockito.junit.jupiter.MockitoExtension;
 import org.springframework.beans.factory.annotation.Autowired;
 
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
 import java.util.Optional;
 
 import static org.junit.jupiter.api.Assertions.*;
@@ -42,4 +45,26 @@ public class ProductServiceTest {
         Mockito.when(productRepository.findById(Mockito.any())).thenReturn(Optional.empty());
         Assertions.assertThrows(ProductNotFoundException.class, () -> productService.getProductById(1L));
     }
+
+    @Test
+    public void whenGetContainsProductName_ShouldReturnListOfProduct() {
+        List<Product> mockProductList = Arrays.asList(new Product("Adidas Runner", "9", 2_900d, "UK", "Black", 15),
+                new Product("Adidas Running", "9", 2_900d, "UK", "Black", 15),
+                new Product("Adidas Walking", "9", 2_900d, "UK", "Black", 15)
+        );
+
+        Mockito.when(productRepository.findByNameContains(Mockito.any())).thenReturn(mockProductList);
+
+        List<Product> productList = productService.getProductByContainsName("Adidas");
+        assertFalse(productList.isEmpty());
+    }
+
+    @Test
+    public void whenGetNotContainsProductName_ShouldReturnEmptyList() {
+        Mockito.when(productRepository.findByNameContains(Mockito.any())).thenReturn(new ArrayList<>());
+
+        List<Product> productList = productService.getProductByContainsName("Adidas");
+        assertFalse(productList.isEmpty());
+    }
+
 }
