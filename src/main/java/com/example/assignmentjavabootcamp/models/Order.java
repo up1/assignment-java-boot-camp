@@ -1,6 +1,7 @@
 package com.example.assignmentjavabootcamp.models;
 
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -36,6 +37,7 @@ public class Order {
 
     @ManyToOne
     @JoinColumn(name = "customer_id")
+    @JsonIgnore
     private Customer orderOwner;
 
     public Order(LocalDateTime buyAt, String payBy, String address, Customer customer) {
