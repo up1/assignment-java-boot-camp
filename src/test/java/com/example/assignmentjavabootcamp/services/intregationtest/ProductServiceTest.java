@@ -5,7 +5,6 @@ import com.example.assignmentjavabootcamp.models.Product;
 import com.example.assignmentjavabootcamp.services.ProductService;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
-import org.mockito.Mockito;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 
