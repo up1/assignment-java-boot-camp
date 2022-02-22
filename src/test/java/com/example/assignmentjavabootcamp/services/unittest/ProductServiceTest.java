@@ -1,5 +1,6 @@
 package com.example.assignmentjavabootcamp.services.unittest;
 
+import com.example.assignmentjavabootcamp.exceptions.InvalidCheckoutException;
 import com.example.assignmentjavabootcamp.exceptions.ProductNotFoundException;
 import com.example.assignmentjavabootcamp.models.Product;
 import com.example.assignmentjavabootcamp.repository.ProductRepository;
@@ -65,6 +66,25 @@ public class ProductServiceTest {
 
         List<Product> productList = productService.getProductByContainsName("Nike");
         assertFalse(productList.isEmpty());
+    }
+
+    @Test
+    public void whenCheckoutProduct_ShouldReduceAmountOfProduct() {
+
+        Product mockProduct = new Product("Adidas Runner", "9", 2_900d, "UK", "Black", 15);
+
+        Mockito.when(productRepository.save(Mockito.any())).thenReturn(mockProduct);
+
+        productService.checkout(mockProduct, 2);
+        assertEquals(13, mockProduct.getAmount());
+    }
+
+    @Test
+    public void whenCheckoutMoreThanProductAmount_ShouldThrowInvalidCheckoutException() {
+        Product mockProduct = new Product("Adidas Runner", "9", 2_900d, "UK", "Black", 1);
+
+        Assertions.assertThrows(InvalidCheckoutException.class, () -> productService.checkout(mockProduct, 2)
+        );
     }
 
 }
