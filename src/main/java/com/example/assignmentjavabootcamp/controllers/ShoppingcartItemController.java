@@ -5,6 +5,7 @@ import com.example.assignmentjavabootcamp.models.ShoppingcartItem;
 import com.example.assignmentjavabootcamp.services.ShoppingcartItemService;
 import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.json.JSONObject;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -43,6 +44,17 @@ public class ShoppingcartItemController {
         return ResponseEntity.ok()
                 .contentType(MediaType.APPLICATION_JSON)
                 .body(shoppingcartItemService.getSummary(customerId).toString());
+    }
+
+    @PostMapping(value = "/checkout", produces = MediaType.APPLICATION_JSON_VALUE)
+    public ResponseEntity<?> checkout(@RequestBody String request) {
+        Long customerId = new JSONObject(request).getLong("customerId");
+        shoppingcartItemService.checkout(customerId);
+        return ResponseEntity.ok()
+                .contentType(MediaType.APPLICATION_JSON)
+                .body(new JSONObject()
+                .put("message", "checkout complete")
+                .put("status", 200).toString());
     }
 
 }
