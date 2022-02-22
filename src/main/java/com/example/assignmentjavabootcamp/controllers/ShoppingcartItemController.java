@@ -14,7 +14,7 @@ import javax.validation.Valid;
 import java.util.List;
 
 @RestController
-@RequestMapping("/cart")
+@RequestMapping("/carts")
 @AllArgsConstructor
 @Slf4j
 public class ShoppingcartItemController {

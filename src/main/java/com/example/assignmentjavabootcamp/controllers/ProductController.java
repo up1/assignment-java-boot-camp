@@ -6,7 +6,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
-@RequestMapping("/product")
+@RequestMapping("/products")
 @AllArgsConstructor
 public class ProductController {
 
