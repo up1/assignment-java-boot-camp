@@ -48,7 +48,7 @@ public class OrderService {
     }
 
     public JSONObject getLatestOrder(Long customerId) {
-        Optional<Order> orderOptional = orderRepository.findFirstByOrderOwnerOrderByBuyAt(customerId);
+        Optional<Order> orderOptional = orderRepository.findFirstByOrderOwnerCustomerIdOrderByBuyAtDesc(customerId);
         if (orderOptional.isPresent()) {
             List<OrderDetail> orderDetailList = orderDetailRepository.findByOrderId(orderOptional.get().getId());
             return buildJSONOrder(orderOptional.get(), orderDetailList);
@@ -56,7 +56,7 @@ public class OrderService {
         throw new OrderNotFoundException("Not found order for customer Id : " + customerId);
     }
 
-    @Transactional
+    @Transactional(propagation = Propagation.REQUIRES_NEW)
     public void buildOrder(Customer customer, List<ShoppingcartItem> itemList) {
         String shippingAddress = "K." + customer.getFirstname() + " " + customer.getLastname() + "\n" +
                 customer.getAddress() + " " + customer.getProvince() + " " + customer.getZipCode() + "\n" +
