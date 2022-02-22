@@ -9,6 +9,7 @@ import com.example.assignmentjavabootcamp.models.ShoppingcartItem;
 import com.example.assignmentjavabootcamp.repository.ShoppingcartItemRepository;
 import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.json.JSONObject;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -93,6 +94,11 @@ public class ShoppingcartItemService {
             total += (item.getAmount() * item.getProduct().getPrice());
         }
         return total;
+    }
+
+    public JSONObject getSummary(Long customerId) {
+        List<ShoppingcartItem> itemList = getAllShoppingcartItem(customerId);
+        return itemList.isEmpty() ? null : new JSONObject().put("itemList", itemList).put("total", getTotal(customerId));
     }
 
     @Transactional
