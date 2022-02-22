@@ -25,7 +25,7 @@ public class Product {
     @NotBlank
     private String size;
 
-    @NotBlank
+    @NotNull
     private Double price;
 
     @NotBlank
@@ -34,7 +34,7 @@ public class Product {
     @NotBlank
     private String color;
 
-    @NotBlank
+    @NotNull
     private Integer amount;
 
     public Product(String name, String size, Double price, String typeOfSize, String color, Integer amount) {

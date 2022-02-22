@@ -25,10 +25,10 @@ public class OrderDetail {
     @NotBlank
     private String color;
 
-    @NotBlank
+    @NotNull
     private Integer amount;
 
-    @NotBlank
+    @NotNull
     private Double price;
 
     @ManyToOne
