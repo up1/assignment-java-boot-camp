@@ -98,7 +98,7 @@ public class ShoppingcartItemService {
 
     public JSONObject getSummary(Long customerId) {
         List<ShoppingcartItem> itemList = getAllShoppingcartItem(customerId);
-        return itemList.isEmpty() ? null : new JSONObject().put("itemList", itemList).put("total", getTotal(customerId));
+        return itemList.isEmpty() ? new JSONObject() : new JSONObject().put("itemList", itemList).put("total", getTotal(customerId));
     }
 
     @Transactional
