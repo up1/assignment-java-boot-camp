@@ -28,4 +28,9 @@ public class CustomerController {
                 .put("status", 200)
         );
     }
+
+    @PostMapping("/addShippingAddress")
+    public ResponseEntity<?> addShippingAddress(@RequestBody @Valid RequestShippingAddress address) {
+        return ResponseEntity.ok().body(customerService.addShippingAddress(address));
+    }
 }

@@ -1,5 +1,6 @@
 package com.example.assignmentjavabootcamp.services;
 
+import com.example.assignmentjavabootcamp.dto.RequestShippingAddress;
 import com.example.assignmentjavabootcamp.exceptions.CustomerNotFoundException;
 import com.example.assignmentjavabootcamp.models.CreditCard;
 import com.example.assignmentjavabootcamp.models.Customer;
@@ -52,6 +53,16 @@ public class CustomerService {
         Customer customer = getCustomer(id);
         creditCardService.removeCreditCard(customer.getCreditCard());
         customer.setCreditCard(null);
+        return saveCustomer(customer);
+    }
+
+    public Customer addShippingAddress(RequestShippingAddress address) {
+        Customer customer = getCustomer(address.getCustomerId());
+        customer.setAddress(address.getAddress());
+        customer.setProvince(address.getProvince());
+        customer.setZipCode(address.getZipCode());
+        customer.setPhoneNumber(address.getPhoneNumber());
+
         return saveCustomer(customer);
     }
 }
