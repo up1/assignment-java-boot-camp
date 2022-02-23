@@ -1,5 +1,6 @@
 package com.example.week02.demo;
 
+import com.example.week02.relations.CustomerRepository;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,6 +16,9 @@ public class DemoController {
     @Autowired
     private DemoGateway demoGateway;
 
+    @Autowired
+    private CustomerRepository customerRepository;
+
     @GetMapping("/demo")
     public String simpleLog() {
         log.info("Called simple logging");
@@ -27,6 +31,13 @@ public class DemoController {
         demoGateway.call();
         throw new RuntimeException("Error");
 //        return "Working with simple logging 02";
+    }
+
+    @GetMapping("/demo-relation")
+    public String simpleRelation() {
+        customerRepository.findById(1);
+        customerRepository.findByName("demo");
+        return "Working with simple relation";
     }
 
 }

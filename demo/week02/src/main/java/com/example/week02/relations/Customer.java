@@ -1,9 +1,30 @@
 package com.example.week02.relations;
 
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.OneToMany;
+import javax.persistence.*;
 import java.util.List;
+
+@NamedEntityGraph(
+        name = "customer-entity-graph",
+        attributeNodes = {
+                @NamedAttributeNode("name"),
+                @NamedAttributeNode("addresses"),
+        }
+)
+@NamedEntityGraph(
+        name = "customer-entity-graph-with-address-customer",
+        attributeNodes = {
+                @NamedAttributeNode("name"),
+                @NamedAttributeNode(value = "addresses", subgraph = "customer-subgraph"),
+        },
+        subgraphs = {
+                @NamedSubgraph(
+                        name = "customer-subgraph",
+                        attributeNodes = {
+                                @NamedAttributeNode("customer")
+                        }
+                )
+        }
+)
 
 @Entity
 public class Customer {
@@ -11,7 +32,10 @@ public class Customer {
     private int id;
     private String name;
 
-    @OneToMany(mappedBy = "customer")
+//    @OneToMany(mappedBy = "customer")
+//    private List<Address> addresses;
+
+    @OneToMany(mappedBy = "customer", fetch = FetchType.EAGER)
     private List<Address> addresses;
 
     public Customer() {
