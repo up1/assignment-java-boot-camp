@@ -23,7 +23,7 @@ public class ProductControllerTest {
     @Test
     public void whenGetUnsavedProductId_ShouldReturn404() {
         String responseString = testRestTemplate.getForObject("/products/9", String.class);
-        assertEquals(404, new JSONObject(responseString).getInt("httpCode"));
+        assertEquals(404, new JSONObject(responseString).getInt("status"));
     }
 
     @Test
