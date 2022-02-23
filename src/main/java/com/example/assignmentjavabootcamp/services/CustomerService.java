@@ -6,13 +6,14 @@ import com.example.assignmentjavabootcamp.models.CreditCard;
 import com.example.assignmentjavabootcamp.models.Customer;
 import com.example.assignmentjavabootcamp.repository.CustomerRepository;
 import lombok.AllArgsConstructor;
-import org.springframework.beans.factory.annotation.Autowired;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 
 import java.util.Optional;
 
 @Service
 @AllArgsConstructor
+@Slf4j
 public class CustomerService {
 
     private final CustomerRepository customerRepository;
@@ -44,7 +45,8 @@ public class CustomerService {
         customer.setProvince(address.getProvince());
         customer.setZipCode(address.getZipCode());
         customer.setPhoneNumber(address.getPhoneNumber());
-
-        return saveCustomer(customer);
+        customer = saveCustomer(customer);
+        log.info("save shipping address complete");
+        return customer;
     }
 }
