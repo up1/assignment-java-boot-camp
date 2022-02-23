@@ -40,4 +40,15 @@ public class DemoController {
         return "Working with simple relation";
     }
 
+    public void process() {
+        try {
+//            System.out.println();
+
+        } catch(Exception e) {
+            log.error("Error" + e.getMessage());
+//            noti(e);
+        }
+    }
+
+
 }
