@@ -65,7 +65,7 @@ public class ProductServiceTest {
         Mockito.when(productRepository.findByNameContains(Mockito.any())).thenReturn(new ArrayList<>());
 
         List<Product> productList = productService.getProductByContainsName("Nike");
-        assertFalse(productList.isEmpty());
+        assertTrue(productList.isEmpty());
     }
 
     @Test
