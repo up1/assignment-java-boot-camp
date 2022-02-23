@@ -14,7 +14,7 @@ public class OrderController {
 
     private final OrderService orderService;
 
-    @GetMapping("/lastest")
+    @GetMapping("/latest")
     public ResponseEntity<?> getLatestOrder(@RequestParam Long customerId) {
         return ResponseEntity.ok()
                 .contentType(MediaType.APPLICATION_JSON)
