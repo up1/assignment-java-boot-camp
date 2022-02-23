@@ -11,11 +11,13 @@ import org.junit.jupiter.api.Test;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.test.annotation.DirtiesContext;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNull;
 
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
+@DirtiesContext(classMode = DirtiesContext.ClassMode.BEFORE_EACH_TEST_METHOD)
 public class ShoppingcartItemServiceTest {
 
     @Autowired
@@ -32,14 +34,6 @@ public class ShoppingcartItemServiceTest {
     @BeforeEach
     public void setup() {
         shoppingcartItemService.addItem(1L, 1L, 15);
-    }
-
-    @AfterEach
-    public void removeOldData() {
-        try {
-            ShoppingcartItem item = shoppingcartItemService.getShoppingcartItem(1L, 1L);
-            shoppingcartItemService.removeItem(1L, 1L, item.getAmount());
-        } catch (ShoppingcartItemNotFoundException ex) {}
     }
 
     @Test

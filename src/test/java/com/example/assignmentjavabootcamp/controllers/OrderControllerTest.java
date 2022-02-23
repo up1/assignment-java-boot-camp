@@ -10,10 +10,12 @@ import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.web.client.TestRestTemplate;
+import org.springframework.test.annotation.DirtiesContext;
 
 import static org.junit.jupiter.api.Assertions.*;
 
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
+@DirtiesContext(classMode = DirtiesContext.ClassMode.BEFORE_EACH_TEST_METHOD)
 public class OrderControllerTest {
 
     @Autowired
@@ -45,7 +47,7 @@ public class OrderControllerTest {
 
     @Test
     public void whenGetLatestOrderFromEmptyCustomer_ShouldReturn404() {
-        String response = testRestTemplate.getForObject("/orders/latest?customerId=" + 2, String.class);
+        String response = testRestTemplate.getForObject("/orders/latest?customerId=" + 3, String.class);
         assertEquals(404, new JSONObject(response).getInt("status"));
     }
 
@@ -63,7 +65,7 @@ public class OrderControllerTest {
 
     @Test
     public void whenGetUnsavedOrderId_ShouldReturn404() {
-        String response = testRestTemplate.getForObject("/orders/1" , String.class);
+        String response = testRestTemplate.getForObject("/orders/4" , String.class);
         assertEquals(404, new JSONObject(response).getInt("status"));
     }
 }

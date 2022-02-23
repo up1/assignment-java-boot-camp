@@ -4,28 +4,19 @@ import com.example.assignmentjavabootcamp.dto.RequestShippingAddress;
 import com.example.assignmentjavabootcamp.exceptions.CustomerNotFoundException;
 import com.example.assignmentjavabootcamp.models.CreditCard;
 import com.example.assignmentjavabootcamp.models.Customer;
-import com.example.assignmentjavabootcamp.repository.CreditCardRepository;
-import com.example.assignmentjavabootcamp.repository.CustomerRepository;
 import com.example.assignmentjavabootcamp.services.CreditCardService;
 import com.example.assignmentjavabootcamp.services.CustomerService;
 import org.junit.jupiter.api.Assertions;
-import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import org.junit.jupiter.api.extension.ExtendWith;
-import org.mockito.InjectMocks;
-import org.mockito.Mock;
-import org.mockito.Mockito;
-import org.mockito.junit.jupiter.MockitoExtension;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.boot.test.mock.mockito.MockBean;
-
-import java.util.Optional;
+import org.springframework.test.annotation.DirtiesContext;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
+@DirtiesContext(classMode = DirtiesContext.ClassMode.BEFORE_EACH_TEST_METHOD)
 public class CustomerServiceTest {
 
     @Autowired
@@ -44,7 +35,7 @@ public class CustomerServiceTest {
 
     @Test
     public void whenGetUnsavedCustomer_ShouldThrowException() {
-        Assertions.assertThrows(CustomerNotFoundException.class, () -> customerService.getCustomer(2L));
+        Assertions.assertThrows(CustomerNotFoundException.class, () -> customerService.getCustomer(3L));
     }
 
     @Test

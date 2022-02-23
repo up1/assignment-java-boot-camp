@@ -10,17 +10,14 @@ import org.json.JSONObject;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import org.junit.jupiter.api.extension.ExtendWith;
-import org.mockito.*;
-import org.mockito.junit.jupiter.MockitoExtension;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
-
-import java.util.List;
+import org.springframework.test.annotation.DirtiesContext;
 
 import static org.junit.jupiter.api.Assertions.*;
 
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
+@DirtiesContext(classMode = DirtiesContext.ClassMode.BEFORE_EACH_TEST_METHOD)
 class OrderServiceTest {
 
     @Autowired
@@ -52,7 +49,7 @@ class OrderServiceTest {
 
     @Test
     public void whenGetUnBuildOrder_ShouldThrowOrderNotFoundException() {
-        Assertions.assertThrows(OrderNotFoundException.class, () -> orderService.getLatestOrder(2L));
+        Assertions.assertThrows(OrderNotFoundException.class, () -> orderService.getLatestOrder(3L));
     }
 
 }
