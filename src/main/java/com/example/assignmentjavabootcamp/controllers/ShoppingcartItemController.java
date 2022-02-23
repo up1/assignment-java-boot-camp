@@ -27,7 +27,7 @@ public class ShoppingcartItemController {
         return ResponseEntity.ok(item);
     }
 
-    @DeleteMapping("/removeFromCart")
+    @PostMapping("/removeFromCart")
     public ResponseEntity<?> removeProductFromCart(@RequestBody @Valid RequestCart request) {
         ShoppingcartItem item = shoppingcartItemService.removeItem(request.getCustomerId(), request.getProductId(), request.getAmount());
         return ResponseEntity.ok(item);
@@ -36,7 +36,11 @@ public class ShoppingcartItemController {
     @GetMapping()
     public ResponseEntity<?> getAllItemInCart(@RequestParam Long customerId) {
         List<ShoppingcartItem> itemList = shoppingcartItemService.getAllShoppingcartItem(customerId);
-        return ResponseEntity.ok(itemList);
+        JSONObject jsonObject = new JSONObject(itemList);
+        return ResponseEntity
+                .ok()
+                .contentType(MediaType.APPLICATION_JSON)
+                .body(jsonObject.toString());
     }
 
     @GetMapping(value = "/getSummary")
@@ -53,8 +57,8 @@ public class ShoppingcartItemController {
         return ResponseEntity.ok()
                 .contentType(MediaType.APPLICATION_JSON)
                 .body(new JSONObject()
-                .put("message", "checkout complete")
-                .put("status", 200).toString());
+                        .put("message", "checkout complete")
+                        .put("status", 200).toString());
     }
 
 }
