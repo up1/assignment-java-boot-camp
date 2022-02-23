@@ -6,6 +6,7 @@ import com.example.assignmentjavabootcamp.models.CreditCard;
 import com.example.assignmentjavabootcamp.models.Customer;
 import com.example.assignmentjavabootcamp.repository.CustomerRepository;
 import lombok.AllArgsConstructor;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.Optional;
@@ -27,18 +28,6 @@ public class CustomerService {
     }
 
     public Customer saveCustomer(Customer customer) {
-        return customerRepository.save(customer);
-    }
-
-    public Customer updateCustomerInfo(Long id, Customer updatedCustInfo) {
-        Customer customer = getCustomer(id);
-        customer.setAddress(updatedCustInfo.getAddress());
-        customer.setFirstname(updatedCustInfo.getFirstname());
-        customer.setLastname(updatedCustInfo.getLastname());
-        customer.setProvince(updatedCustInfo.getProvince());
-        customer.setPhoneNumber(updatedCustInfo.getPhoneNumber());
-        customer.setZipCode(updatedCustInfo.getZipCode());
-
         return customerRepository.save(customer);
     }
 
