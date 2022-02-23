@@ -48,15 +48,13 @@ public class CustomerServiceTest {
         customer.setFirstname("Jelly");
         customer.setFirstname("Hank");
         customer.setZipCode("12345");
-        Mockito.when(customerRepository.findById(1L)).thenReturn(Optional.of(customer));
-
     }
 
     @Test
     public void whenGetSavedCustomer_ShouldReturnCustomer() {
+        Mockito.when(customerRepository.findById(1L)).thenReturn(Optional.of(customer));
         Customer getCustomer = customerService.getCustomer(1L);
         assertEquals(customer.getCustomerId(), getCustomer.getCustomerId());
-
     }
 
     @Test
@@ -67,7 +65,7 @@ public class CustomerServiceTest {
 
     @Test
     public void whenAddCreditCardToExistCustomer_ShouldSaveCreditCard() {
-
+        Mockito.when(customerRepository.findById(1L)).thenReturn(Optional.of(customer));
         CreditCard card = new CreditCard("1234567890123458", "222", "09/26");
         Mockito.when(creditCardService.addCreditCard(Mockito.any())).thenReturn(card);
         Mockito.when(customerRepository.save(Mockito.any())).thenReturn(customer);
@@ -79,9 +77,10 @@ public class CustomerServiceTest {
 
     @Test
     public void whenAddShippingAddress_ShouldSaveToCustomer() {
-        RequestShippingAddress address = new RequestShippingAddress(1L,"34 Moo8","73110","Bangkok","0911111111");
+        Mockito.when(customerRepository.findById(1L)).thenReturn(Optional.of(customer));
+        RequestShippingAddress address = new RequestShippingAddress(1L, "34 Moo8", "73110", "Bangkok", "0911111111");
         Mockito.when(customerRepository.save(Mockito.any())).thenReturn(customer);
-       Customer c1 = customerService.addShippingAddress(address);
+        Customer c1 = customerService.addShippingAddress(address);
 
         assertEquals(c1.getProvince(), address.getProvince());
     }
