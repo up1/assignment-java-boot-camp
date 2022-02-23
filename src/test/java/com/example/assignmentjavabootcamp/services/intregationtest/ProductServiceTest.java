@@ -47,9 +47,7 @@ public class ProductServiceTest {
 
     @Test
     public void whenCheckoutProduct_ShouldReduceAmountOfProduct() {
-
         Product mockProduct = productService.getProductById(1L);
-
         productService.checkout(mockProduct, 1);
         assertEquals(99, mockProduct.getAmount());
     }
