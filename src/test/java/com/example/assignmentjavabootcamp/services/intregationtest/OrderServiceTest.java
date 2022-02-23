@@ -52,7 +52,7 @@ class OrderServiceTest {
 
     @Test
     public void whenGetUnBuildOrder_ShouldThrowOrderNotFoundException() {
-        Assertions.assertThrows(OrderNotFoundException.class, () -> orderService.getLatestOrder(customer.getCustomerId()));
+        Assertions.assertThrows(OrderNotFoundException.class, () -> orderService.getLatestOrder(2L));
     }
 
 }
