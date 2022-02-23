@@ -13,5 +13,5 @@ import java.time.LocalDateTime;
 public class ExceptionResponse {
     private String reason;
     private LocalDateTime timeStamp;
-    private Integer httpCode;
+    private Integer status;
 }
