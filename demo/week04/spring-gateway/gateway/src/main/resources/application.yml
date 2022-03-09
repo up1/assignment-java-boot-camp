@@ -1,0 +1,17 @@
+spring:
+  cloud:
+    gateway:
+      default-filters:
+        - name: DemoGlobalFilter
+      routes:
+        - id: service1
+          uri: http://localhost:8081
+          predicates:
+            - Path=/service1/**
+#          filters:
+#            - name: X1Filter
+#            - name: X2Filter
+        - id: service2
+          uri: http://localhost:8082
+          predicates:
+            - Path=/service2/**
