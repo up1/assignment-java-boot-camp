@@ -45,6 +45,7 @@ public class DemoController {
 //            System.out.println();
 
         } catch(Exception e) {
+//            e.printStackTrace();
             log.error("Error" + e.getMessage());
 //            noti(e);
         }

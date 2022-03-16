@@ -6,7 +6,7 @@ import org.springframework.stereotype.Component;
 
 @Component
 //@Scope(value = ConfigurableBeanFactory.SCOPE_SINGLETON)
-//@Scope(value = ConfigurableBeanFactory.SCOPE_PROTOTYPE)
+@Scope(value = ConfigurableBeanFactory.SCOPE_PROTOTYPE)
 public class Employee {
     private int id;
     private String name;
